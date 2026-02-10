@@ -4,21 +4,17 @@
 
 header("Content-Type: application/json");
 //sample data
-$response = [
+$response = 
+[
     [
         'id' => 1,
-        'name' => 'acer nitro 15',
-        'categories' => ['laptop', 'electronics'],
+        'name' => 'the pragmatic programmer',
+        'categories' => ['book', 'programming']
     ],
     [
         'id' => 2,
-        'name' => 'poco x3 pro',
-        'categories' => ['phone', 'electronics', '2025', 'type-c'],
-    ],
-    [
-        'id' => 3,
-        'name' => 'atomic habits',
-        'categories' => ['book', 'self-improvement'],
+        'name' => 'clean code',
+        'categories' => ['book', 'programming']
     ]
 ];
 
