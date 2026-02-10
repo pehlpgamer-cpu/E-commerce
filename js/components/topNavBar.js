@@ -28,17 +28,17 @@ const navBtnData =
         link: baseURL + 'pages/public/index.php'
     },
     {
-        iconClass: '',
+        iconClass: 'bi bi-bag-fill',
         label: 'Products',
         link: baseURL + 'pages/public/products.php'
     },
     {
-        iconClass: '',
+        iconClass: 'bi bi-cart4',
         label: 'Cart',
         link: baseURL + 'pages/customer/cart.php'
     },
     {
-        iconClass: '',
+        iconClass: 'bi bi-person-circle',
         label: 'Account',
         link: baseURL + 'pages/customer/account.php'
     },

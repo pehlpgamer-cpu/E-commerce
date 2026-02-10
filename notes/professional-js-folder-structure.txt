@@ -1,0 +1,102 @@
+project-root/
+│
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   ├── robots.txt
+│   └── assets/
+│       ├── images/
+│       ├── fonts/
+│       └── icons/
+│
+├── src/
+│   ├── app/
+│   │   ├── bootstrap.js
+│   │   ├── router.js
+│   │   └── app.js
+│   │
+│   ├── components/
+│   │   ├── Button/
+│   │   │   ├── Button.js
+│   │   │   ├── Button.css
+│   │   │   └── index.js
+│   │   ├── Modal/
+│   │   └── Navbar/
+│   │
+│   ├── pages/
+│   │   ├── Home/
+│   │   ├── Login/
+│   │   └── Dashboard/
+│   │
+│   ├── services/
+│   │   ├── auth.service.js
+│   │   ├── user.service.js
+│   │   └── payment.service.js
+│   │
+│   ├── api/
+│   │   ├── httpClient.js
+│   │   ├── auth.api.js
+│   │   └── users.api.js
+│   │
+│   ├── store/
+│   │   ├── index.js
+│   │   ├── auth.store.js
+│   │   └── user.store.js
+│   │
+│   ├── hooks/
+│   │   ├── useAuth.js
+│   │   └── useFetch.js
+│   │
+│   ├── utils/
+│   │   ├── formatDate.js
+│   │   ├── debounce.js
+│   │   └── uuid.js
+│   │
+│   ├── helpers/
+│   │   ├── dom.helper.js
+│   │   └── validation.helper.js
+│   │
+│   ├── constants/
+│   │   ├── routes.js
+│   │   ├── roles.js
+│   │   └── messages.js
+│   │
+│   ├── config/
+│   │   ├── env.js
+│   │   └── api.config.js
+│   │
+│   ├── styles/
+│   │   ├── reset.css
+│   │   ├── variables.css
+│   │   └── global.css
+│   │
+│   ├── assets/
+│   │   ├── images/
+│   │   └── icons/
+│   │
+│   └── main.js
+│
+├── tests/
+│   ├── unit/
+│   ├── integration/
+│   └── e2e/
+│
+├── scripts/
+│   ├── build.js
+│   ├── seed.js
+│   └── cleanup.js
+│
+├── docs/
+│   ├── architecture.md
+│   ├── api.md
+│   └── conventions.md
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── package.json
+├── package-lock.json / yarn.lock / pnpm-lock.yaml
+├── jsconfig.json / tsconfig.json
+├── eslint.config.js
+├── prettier.config.js
+└── README.md
