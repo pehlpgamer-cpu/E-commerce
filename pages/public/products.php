@@ -9,7 +9,7 @@
 </head>
 <body class="bg-white">
     
-    <nav id class="flex justify-evenly gap-2 border-b p-1.5">
+    <nav id="navContainer" class="flex justify-evenly gap-2 border-b p-1.5">
         <a href="" class="bg-white p-1 flex gap-1 rounded-md hover:bg-gray-200">
             <i class="bi bi-house-fill"></i>
             <label>Home</label>
@@ -53,12 +53,12 @@ import { topNavBar } from "../../js/components/topNavBar.js";
 
 
 
+    const navContainer = document.getElementById('navContainer');
     const productContainer = document.getElementById('productContainer');
 
-    let productDataList = 
-    [
-        
-    ];
+    navContainer.innerHTML = topNavBar();
+
+    let productDataList = [];
 
     function displayData()
     {
@@ -115,7 +115,6 @@ import { topNavBar } from "../../js/components/topNavBar.js";
     }
 
     testFetchProducts();
-
 </script>
 
 

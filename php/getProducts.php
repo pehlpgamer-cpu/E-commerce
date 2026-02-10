@@ -1,6 +1,6 @@
 <?php
 
-//require  '../php/database.php';
+//require  '../php/database.php'; // causes an error
 
 header("Content-Type: application/json");
 //sample data
@@ -9,12 +9,17 @@ $response =
     [
         'id' => 1,
         'name' => 'the pragmatic programmer',
-        'categories' => ['book', 'programming']
+        'price' => 150.00
     ],
     [
         'id' => 2,
         'name' => 'clean code',
-        'categories' => ['book', 'programming']
+        'price' => 300.00      
+    ],
+    [
+        'id' => 3,
+        'name' => 'grokking algorithms',
+        'price' => 265.00      
     ]
 ];
 

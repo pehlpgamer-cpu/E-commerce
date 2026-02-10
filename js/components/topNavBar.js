@@ -1,7 +1,9 @@
+import { baseURL } from "../configs.js";
 
+//const baseURL = 'http://localhost/E-commerce/'; // temporary
 
-export function topNavBar(navContainer) {
-    navBtns = '';
+export function topNavBar() {
+    let navBtns = '';
 
     for (let i of navBtnData)
     {
@@ -13,8 +15,7 @@ export function topNavBar(navContainer) {
         </a>
         `;
     }
-
-    navContainer.innerHTML = navBtns;
+    return navBtns;
 }
 
 
@@ -24,11 +25,21 @@ const navBtnData =
     {
         iconClass: 'bi bi-house-fill',
         label: 'Home',
-        link: ''
+        link: baseURL + 'pages/public/index.php'
     },
     {
         iconClass: '',
         label: 'Products',
-        link: ''
-    }
+        link: baseURL + 'pages/public/products.php'
+    },
+    {
+        iconClass: '',
+        label: 'Cart',
+        link: baseURL + 'pages/customer/cart.php'
+    },
+    {
+        iconClass: '',
+        label: 'Account',
+        link: baseURL + 'pages/customer/account.php'
+    },
 ];
