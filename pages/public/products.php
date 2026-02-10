@@ -97,28 +97,24 @@ import { topNavBar } from "../../js/components/topNavBar.js";
     }
 
 
-    displayData();
+    async function testFetchProducts()
+    {
+        try {
+            const res = await fetch("http://localhost/E-commerce/php/getProducts.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            });
+            const data = await res.json();
+            productDataList = data;
+            displayData();
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
+    }
 
-let test = '';
-function testFetchProducts()
-{
-    fetch("http://localhost/E-commerce/php/getProducts.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        
-    })
-    .then(res => res.json())
-    .then(data => {
-        test = data.id;
-    });
-}
-
-
-
-testFetchProducts();
-console.log(test);
+    testFetchProducts();
 
 </script>
 
