@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles/global.css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    
     <title>Products</title>
 </head>
 <body class="bg-white">
     
-    <nav id="navContainer" class="flex justify-evenly gap-2 border-b p-1.5">
+    <nav id="navContainer" class="flex justify-evenly gap-2 border-b p-1.5 bg-white">
         <!-- import { topNavBar } from "../../js/components/topNavBar.js"; -->
     </nav>
     <search class="p-2 border-b">
@@ -44,7 +46,7 @@ import { testFetchProducts } from '../../js/api/testFetchProducts.js'
 const navContainer = document.getElementById('navContainer');
 const productContainer = document.getElementById('productContainer');
 
-navContainer.innerHTML = topNavBar();
+navContainer.innerHTML = topNavBar(1);
 
 let productDataList = [];
 

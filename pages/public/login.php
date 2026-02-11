@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 class="text-2xl">
+    <h1 class="text-4xl">
         LOGIN
     </h1>
 </body>

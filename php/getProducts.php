@@ -1,8 +1,29 @@
 <?php
-
-//require  '../php/database.php'; // causes an error
-
 header("Content-Type: application/json");
+
+$data = [];
+
+require  '../php/database.php'; // causes an error
+
+$sql = "SELECT * FROM products_tbl;";
+// Execute the SQL query
+$result = $conn->query($sql);
+
+// Process the result set
+if ($result->num_rows > 0) {
+  // Output data of each row
+    while($row = $result->fetch_assoc()) {
+        $data[] = ['id' => $row["product_id"], 'name' => $row["name"], 'price' => $row["price"]];
+    }
+} 
+else {
+    echo "0 results";
+}
+
+
+
+
+
 
 $sampleData = 
 [
@@ -50,6 +71,8 @@ $sampleData =
 
 $response = $sampleData;
 
-echo json_encode($response);
+echo json_encode($data);
+
+//echo json_encode($response);
 
 

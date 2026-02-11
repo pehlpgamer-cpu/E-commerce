@@ -2,16 +2,22 @@ import { baseURL } from "../configs.js";
 
 //const baseURL = 'http://localhost/E-commerce/'; // temporary
 
-export function topNavBar() {
+export function topNavBar(highlightIndex) {
     let navBtns = '';
+    let btnClass = '';
+    const nonHighlightedBtnClass = 'bg-white rounded-md hover:scale hover:bg-gray-200';
+    const highlightedBtnClass = 'bg-black text-white font-bold rounded-md hover:scale hover:bg-gray-200';
 
-    for (let i of navBtnData)
+    for (let i = 0; i < navBtnData.length; i++)
     {
+        if (highlightIndex === i)btnClass = highlightedBtnClass;
+        else btnClass = nonHighlightedBtnClass;
+
         navBtns += 
         `
-        <a href="${i.link}" class="bg-white p-1 flex gap-1 rounded-md hover:scale hover:bg-gray-200">
-            <i class="${i.iconClass}"></i>
-            <label>${i.label}</label>
+        <a href="${navBtnData[i].link}" class="${btnClass} grow p-1 flex gap-1 justify-center">
+            <i class="${navBtnData[i].iconClass}"></i>
+            <label>${navBtnData[i].label}</label>
         </a>
         `;
     }
@@ -24,7 +30,7 @@ const navBtnData =
 [
     {
         iconClass: 'bi bi-house-fill',
-        label: 'Home',
+        label: 'Home!!!',
         link: baseURL + 'pages/public/index.php'
     },
     {
