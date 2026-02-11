@@ -30,7 +30,7 @@ const navBtnData =
 [
     {
         iconClass: 'bi bi-house-fill',
-        label: 'Home!!!',
+        label: 'Home',
         link: baseURL + 'pages/public/index.php'
     },
     {
