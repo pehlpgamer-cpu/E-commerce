@@ -59,10 +59,8 @@
         <button id="prevPageBtn" class="p-1 border rounded-l-md hover:bg-gray-100">Prev</button>
         <button id="nextPageBtn" class="p-1 border rounded-r-md hover:bg-gray-100">Next</button>
         <section id="paginationPagesContainer" class="flex p-1 gap-1">
-            <!-- PLACEHOLDERS -->
-            <button class="p-1 border rounded-md">1</button>
-            <button class="p-1 border rounded-md">2</button>
-            <button class="p-1 border rounded-md">3</button>
+            <!-- PLACEHOLDER -->
+            <button class="p-1 border rounded-sm hover:bg-gray-100 hover:scale-105 duration-100">1</button>
         </section>
     </section>
 </body>
@@ -82,25 +80,28 @@ import { testFetchProducts } from '../../js/api/testFetchProducts.js'
 
 // HTML ELEMENTS
 const navContainer = document.getElementById('navContainer');
-const productContainer = document.getElementById('productContainer');
+
 const searchNameInput = document.getElementById('searchNameInput');
 const searchButton = document.getElementById('searchButton');
+const productContainer = document.getElementById('productContainer');
+
 const prevPageBtn = document.getElementById('prevPageBtn');
 const nextPageBtn = document.getElementById('nextPageBtn');
+const paginationPagesContainer = document.getElementById('paginationPagesContainer');
 
-navContainer.innerHTML = topNavBar(1);
 
-
+// STATES/DATA
 let productDataList = [];
 let totalPages = 1;
 let currentPage = 1;
 let getProductApiMessage = '';
 
-// Add event listener instead of using onclick (to make it work with <script type="module">)
+// EVENT LISTENERS
 searchButton.onclick = loadProducts;
 nextPageBtn.onclick = nextPage;
 prevPageBtn.onclick = prevPage;
 
+navContainer.innerHTML = topNavBar(1);
 
 function displayData()
 {
@@ -123,6 +124,7 @@ function prevPage()
     if (currentPage === 0) return;
     else currentPage--;
     loadProducts();
+    
 }
 
 // Make this async and await the fetch
@@ -132,9 +134,40 @@ async function loadProducts() {
     totalPages = response.totalPages;
     getProductApiMessage = response.message;
     displayData();
+    loadPageBtns(); 
+}
+
+function loadPageBtns()
+{
+    let btns = '';
+    for (let i = 0; i < totalPages; i++)
+    {
+        if (currentPage === i+1) btns += pageBtn(i+1, true);
+        else btns += pageBtn(i+1, false);
+    }
+    paginationPagesContainer.innerHTML = btns;
+}
+
+function pageBtn(pageNumber, highlighted) // highlighting WIP...
+{
+    let btnClass = '';
+    const nonHighlightedClass = 'bg-white text-black';
+    const highlightedClass = 'bg-black text-white font-bold';
+
+    if (highlighted === true) btnClass = highlightedClass;
+    else btnClass = nonHighlightedClass;
+
+    const btn = 
+    `
+        <button class="${btnClass} p-1 border rounded-sm hover:bg-gray-100 hover:scale-105 duration-100 cursor-pointer">
+            ${pageNumber}
+        </button>
+    `;
+    return btn;
 }
 
 loadProducts(); 
+
 </script>
 
 
