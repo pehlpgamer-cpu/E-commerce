@@ -12,7 +12,13 @@
 <body class="bg-white flex flex-col">
     
     <nav id="navContainer" class="flex justify-evenly gap-2 border-b p-1.5 bg-white">
-        <!-- import { topNavBar } from "../../js/components/topNavBar.js"; -->
+        <!-- 
+        <script type=module>
+            import { topNavBar } from "../../js/components/topNavBar.js";
+            const navContainer = document.getElementById('navContainer');
+            navContainer.innerHTML = topNavBar(2);
+        </script> 
+        -->
     </nav>
     <search class="p-2 border-b flex gap-2">
         
@@ -37,6 +43,9 @@
                 <button id="searchButton" class="p-1 border rounded-md w-16">
                     <i class="bi bi-search"></i>
                 </button>
+                <button id="clearFiltersButton" class="p-1 border rounded-md w-16">
+                    <i class="bi bi-search"></i>
+                </button>
             </div>
         </div>
     </search>
@@ -47,8 +56,8 @@
     </section>
 
     <section class="flex p-2 gap-1 border-t">
-        <button onclick="nextPage()" class="p-1 border rounded-l-md hover:bg-gray-100">Prev</button>
-        <button onclick="prevPage()" class="p-1 border rounded-r-md hover:bg-gray-100">Next</button>
+        <button id="prevPageBtn" class="p-1 border rounded-l-md hover:bg-gray-100">Prev</button>
+        <button id="nextPageBtn" class="p-1 border rounded-r-md hover:bg-gray-100">Next</button>
         <section id="paginationPagesContainer" class="flex p-1 gap-1">
             <!-- PLACEHOLDERS -->
             <button class="p-1 border rounded-md">1</button>
@@ -76,28 +85,52 @@ const navContainer = document.getElementById('navContainer');
 const productContainer = document.getElementById('productContainer');
 const searchNameInput = document.getElementById('searchNameInput');
 const searchButton = document.getElementById('searchButton');
+const prevPageBtn = document.getElementById('prevPageBtn');
+const nextPageBtn = document.getElementById('nextPageBtn');
 
 navContainer.innerHTML = topNavBar(1);
 
-let productDataList = [];
 
+let productDataList = [];
+let totalPages = 1;
+let currentPage = 1;
+let getProductApiMessage = '';
 
 // Add event listener instead of using onclick (to make it work with <script type="module">)
 searchButton.onclick = loadProducts;
+nextPageBtn.onclick = nextPage;
+prevPageBtn.onclick = prevPage;
+
 
 function displayData()
 {
     let cardsWithData = ''; 
     for (let i of productDataList)
     {
-        cardsWithData += productCard(i.id, i.name, i.categories);
+        cardsWithData += productCard(i.id, i.name, i.categories, i.price);
     }
     productContainer.innerHTML = cardsWithData;
 }
 
+function nextPage()
+{
+    if (currentPage === totalPages) return;
+    else currentPage++;
+    loadProducts();
+}
+function prevPage()
+{
+    if (currentPage === 0) return;
+    else currentPage--;
+    loadProducts();
+}
+
 // Make this async and await the fetch
 async function loadProducts() {
-    productDataList = await testFetchProducts(searchNameInput.value);
+    const response = await testFetchProducts(searchNameInput.value, currentPage);
+    productDataList = response.productData;
+    totalPages = response.totalPages;
+    getProductApiMessage = response.message;
     displayData();
 }
 
