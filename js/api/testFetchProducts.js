@@ -7,7 +7,8 @@ export async function testFetchProducts(searchName)
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: JSON.stringify({ searchName: searchName})
+            body: new URLSearchParams({ searchName: searchName})
+            //body: JSON.stringify({ searchName: searchName})
         });
         const data = await res.json();
         console.table(data);

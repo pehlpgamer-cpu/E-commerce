@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
 
-$search = $_POST['searchName'] ?? '';
+$searchName = $_POST['searchName'] ?? '';
 $page = $_POST['page'] ?? 1;
 
 $data = [];
@@ -15,9 +15,9 @@ $test = 'red';
 
 $sql = '';
 
-if ($search === '') $sql = "SELECT * FROM products_tbl LIMIT $limit";
+if (trim($searchName) === '') $sql = "SELECT * FROM products_tbl LIMIT $limit";
 else {
-    $sql = "SELECT * FROM products_tbl WHERE name LIKE '%red%' LIMIT $limit";
+    $sql = "SELECT * FROM products_tbl WHERE name LIKE '%$searchName%' LIMIT $limit";
 }
 
 
