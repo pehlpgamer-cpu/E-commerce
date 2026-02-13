@@ -40,12 +40,13 @@
         <div class="flex flex-col">
             <div class="grow"></div>
             <div>
+                <button id="clearFiltersButton" class="p-1 border rounded-md w-16">
+                    <i class="bi bi-eraser-fill"></i>
+                </button>
                 <button id="searchButton" class="p-1 border rounded-md w-16">
                     <i class="bi bi-search"></i>
                 </button>
-                <button id="clearFiltersButton" class="p-1 border rounded-md w-16">
-                    <i class="bi bi-search"></i>
-                </button>
+                
             </div>
         </div>
     </search>
@@ -58,10 +59,12 @@
     <section class="flex p-2 gap-1 border-t">
         <button id="prevPageBtn" class="p-1 border rounded-l-md hover:bg-gray-100">Prev</button>
         <button id="nextPageBtn" class="p-1 border rounded-r-md hover:bg-gray-100">Next</button>
-        <section id="paginationPagesContainer" class="flex p-1 gap-1">
+        <section id="paginationPagesContainer" class="flex p-0.5 gap-1">
             <!-- PLACEHOLDER -->
             <button class="p-1 border rounded-sm hover:bg-gray-100 hover:scale-105 duration-100">1</button>
         </section>
+        <input id="jumpToPageInput" type="number" class="p-1 rounded-l-md border w-14"/>
+        <button class="p-1 rounded-r-md border">View</button>
     </section>
 </body>
 </html>
@@ -75,8 +78,6 @@ import { topNavBar } from "../../js/components/topNavBar.js";
 // API
 import { testFetchProducts } from '../../js/api/testFetchProducts.js'
 
-// UTILS
-// n/a
 
 // HTML ELEMENTS
 const navContainer = document.getElementById('navContainer');
@@ -88,7 +89,7 @@ const productContainer = document.getElementById('productContainer');
 const prevPageBtn = document.getElementById('prevPageBtn');
 const nextPageBtn = document.getElementById('nextPageBtn');
 const paginationPagesContainer = document.getElementById('paginationPagesContainer');
-
+const jumpToPageInput = document.getElementById('jumpToPageInput');
 
 // STATES/DATA
 let productDataList = [];
@@ -100,6 +101,15 @@ let getProductApiMessage = '';
 searchButton.onclick = loadProducts;
 nextPageBtn.onclick = nextPage;
 prevPageBtn.onclick = prevPage;
+jumpToPageInput.onkeypress = (event) => {
+    if (event.key === 'Enter') {
+        jumpToPage(parseInt(jumpToPageInput.value));
+    }
+};
+
+// Make accessible globally for onclick handlers
+window.jumpToPage = jumpToPage;
+
 
 navContainer.innerHTML = topNavBar(1);
 
@@ -137,6 +147,13 @@ async function loadProducts() {
     loadPageBtns(); 
 }
 
+function jumpToPage(pageNumber){
+    currentPage = pageNumber;
+    loadProducts();
+    jumpToPageInput.value = '';
+}
+
+
 function loadPageBtns()
 {
     let btns = '';
@@ -148,10 +165,10 @@ function loadPageBtns()
     paginationPagesContainer.innerHTML = btns;
 }
 
-function pageBtn(pageNumber, highlighted) // highlighting WIP...
+function pageBtn(pageNumber, highlighted) 
 {
     let btnClass = '';
-    const nonHighlightedClass = 'bg-white text-black';
+    const nonHighlightedClass = 'bg-white text-black hover:bg-gray-100';
     const highlightedClass = 'bg-black text-white font-bold';
 
     if (highlighted === true) btnClass = highlightedClass;
@@ -159,7 +176,7 @@ function pageBtn(pageNumber, highlighted) // highlighting WIP...
 
     const btn = 
     `
-        <button class="${btnClass} p-1 border rounded-sm hover:bg-gray-100 hover:scale-105 duration-100 cursor-pointer">
+        <button onclick="jumpToPage(${pageNumber})" class="${btnClass} p-1 border rounded-sm hover:scale-105 duration-100 cursor-pointer">
             ${pageNumber}
         </button>
     `;
@@ -170,9 +187,3 @@ loadProducts();
 
 </script>
 
-
-
-<style>
-
-
-</style>
