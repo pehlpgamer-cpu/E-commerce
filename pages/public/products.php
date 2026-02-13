@@ -132,9 +132,7 @@ jumpToPageInput.onkeypress = (event) => {
 
 // Make accessible globally for onclick handlers
 window.jumpToPage = jumpToPage;
-window.openCartModal = openCartModal;
-window.closeCartModal = closeCartModal;
-window.addToCart = addToCart;
+
 
 
 navContainer.innerHTML = topNavBar(1);
@@ -209,33 +207,8 @@ function pageBtn(pageNumber, highlighted)
     return btn;
 }
 
-// CART MODAL FUNCTIONS - AI GENERATED
-let selectedProductId = null;
-let selectedProductName = null;
-let selectedProductPrice = null;
 
-function openCartModal(productId, productName, productPrice) {
-    selectedProductId = productId;
-    selectedProductName = productName;
-    selectedProductPrice = productPrice;
-    
-    document.getElementById('modalProductName').textContent = productName;
-    document.getElementById('modalProductPrice').textContent = `₱ ${productPrice}`;
-    document.getElementById('quantityInput').value = '1';
-    
-    document.getElementById('cartModal').showModal();
-}
 
-function closeCartModal() {
-    document.getElementById('cartModal').close();
-}
-
-function addToCart() {
-    const quantity = parseInt(document.getElementById('quantityInput').value);
-    console.log(`Added ${quantity} of ${selectedProductName} (ID: ${selectedProductId}) to cart`);
-    // TODO: Implement actual cart functionality
-    closeCartModal();
-}
 
 loadProducts(); 
 
