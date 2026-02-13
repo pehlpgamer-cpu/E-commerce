@@ -5,7 +5,8 @@ header("Content-Type: application/json");
 
 $searchName = $_POST['searchName'] ?? '';
 $searchPage = $_POST['searchPage'] ?? 1;
-
+// $searchMinimumPrice = $_POST['searchMinimumPrice'] ?? 0;
+// $searchMaximumPrice = $_POST['searchMaximumPrice'] ?? 999999999;
 // JSON RESPONSE ----------------------------------------------------------------------------------------------------------------------------------------------------
 $data = [];
 $totalPages = 1;

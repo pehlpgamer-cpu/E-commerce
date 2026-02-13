@@ -66,6 +66,28 @@
         <input id="jumpToPageInput" type="number" class="p-1 rounded-l-md border w-14"/>
         <button class="p-1 rounded-r-md border">View</button>
     </section>
+
+    <!-- Cart Modal - AI GENERATED -->
+    <dialog id="cartModal" class="rounded-lg border shadow-lg p-6 max-w-sm">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold">Add to Cart</h2>
+            <button onclick="closeCartModal()" class="text-2xl cursor-pointer">&times;</button>
+        </div>
+        <p id="modalProductName" class="text-lg mb-2"></p>
+        <p id="modalProductPrice" class="text-xl font-bold mb-4"></p>
+        <div class="flex flex-col gap-2 mb-4">
+            <label for="quantityInput">Quantity:</label>
+            <input id="quantityInput" type="number" min="1" value="1" class="p-2 border rounded-md"/>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="addToCart()" class="flex-1 p-2 bg-black text-white rounded-md hover:bg-gray-800 cursor-pointer">
+                Add to Cart
+            </button>
+            <button onclick="closeCartModal()" class="flex-1 p-2 border rounded-md hover:bg-gray-100 cursor-pointer">
+                Cancel
+            </button>
+        </div>
+    </dialog>
 </body>
 </html>
 
@@ -101,6 +123,7 @@ let getProductApiMessage = '';
 searchButton.onclick = loadProducts;
 nextPageBtn.onclick = nextPage;
 prevPageBtn.onclick = prevPage;
+
 jumpToPageInput.onkeypress = (event) => {
     if (event.key === 'Enter') {
         jumpToPage(parseInt(jumpToPageInput.value));
@@ -109,6 +132,9 @@ jumpToPageInput.onkeypress = (event) => {
 
 // Make accessible globally for onclick handlers
 window.jumpToPage = jumpToPage;
+window.openCartModal = openCartModal;
+window.closeCartModal = closeCartModal;
+window.addToCart = addToCart;
 
 
 navContainer.innerHTML = topNavBar(1);
@@ -181,6 +207,34 @@ function pageBtn(pageNumber, highlighted)
         </button>
     `;
     return btn;
+}
+
+// CART MODAL FUNCTIONS - AI GENERATED
+let selectedProductId = null;
+let selectedProductName = null;
+let selectedProductPrice = null;
+
+function openCartModal(productId, productName, productPrice) {
+    selectedProductId = productId;
+    selectedProductName = productName;
+    selectedProductPrice = productPrice;
+    
+    document.getElementById('modalProductName').textContent = productName;
+    document.getElementById('modalProductPrice').textContent = `₱ ${productPrice}`;
+    document.getElementById('quantityInput').value = '1';
+    
+    document.getElementById('cartModal').showModal();
+}
+
+function closeCartModal() {
+    document.getElementById('cartModal').close();
+}
+
+function addToCart() {
+    const quantity = parseInt(document.getElementById('quantityInput').value);
+    console.log(`Added ${quantity} of ${selectedProductName} (ID: ${selectedProductId}) to cart`);
+    // TODO: Implement actual cart functionality
+    closeCartModal();
 }
 
 loadProducts(); 

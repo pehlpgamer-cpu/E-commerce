@@ -17,7 +17,7 @@ export function productCard(id, name, categories, price = 0.00)
                     <label class="cursor-pointer">Buy</label>
                 </button>
 
-                <button class="flex-1 p-1 rounded-md border hover:bg-gray-100">
+                <button onclick="openCartModal(${id}, '${name}', ${price})" class="flex-1 p-1 rounded-md border hover:bg-gray-100 cursor-pointer">
                     <i class="bi bi-cart4"></i>
                     <label>Cart</label>
                 </button>
